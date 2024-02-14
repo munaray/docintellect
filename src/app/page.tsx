@@ -47,7 +47,7 @@ const Home = () => {
               <div className="mt-15 flow-root sm:mt-24">
                 <figure className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-2 lg:rounded-2xl lg:p-4">
                   <Image
-                    src="/"
+                    src="/dashboard-preview.jpg"
                     alt="product view"
                     width={1368}
                     height={866}
@@ -136,7 +136,7 @@ const Home = () => {
               <div className="mt-8 flow-root sm:mt-24">
                 <figure className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-2 lg:rounded-2xl lg:p-4">
                   <Image
-                    src="/"
+                    src="/file-upload-preview.jpg"
                     alt="uploading preview"
                     width={1368}
                     height={866}
