@@ -41,6 +41,23 @@ export const appRouter = router({
       }
     })
   }),
+
+  /* Polling api route */
+  getFile: privateProcedure.input(z.object({ key: z.string() })).mutation( async ({ ctx, input }) => {
+    const { userId } = ctx
+
+    const file = await db.file.findFirst({
+      where: {
+        key: input.key,
+        userId,
+      }
+    })
+
+    if (!file) throw new TRPCError({ code: "NOT_FOUND" })
+
+    return  file
+  }),
+
   /* Delete Pdf file from database */
   deleteFile: privateProcedure.input(z.object({ id: z.string()  })).mutation(async ({ ctx, input }) => {
     const { userId } = ctx
