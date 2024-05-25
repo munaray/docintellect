@@ -58,6 +58,22 @@ export const appRouter = router({
     return  file
   }),
 
+  /* TO handle the loading state properly */
+  getFileUploadStatus: privateProcedure.input(z.object({ fileId: z.string() })).query( async ({ ctx, input }) => {
+    const { userId } = ctx
+
+    const file = await db.file.findFirst({
+      where: {
+        id: input.fileId,
+        userId: ctx.userId
+      }
+    })
+
+    if (!file) return { status: "PENDING" as const }
+
+    return {status: file.uploadStatus}
+  }),
+
   /* Delete Pdf file from database */
   deleteFile: privateProcedure.input(z.object({ id: z.string()  })).mutation(async ({ ctx, input }) => {
     const { userId } = ctx
