@@ -1,14 +1,25 @@
 {
-    "cSpell.words": [
-        "Autosize",
-        "docintellect",
-        "hookform",
-        "langchain",
-        "Nums",
-        "openai",
-        "Opps",
-        "pincone",
-        "simplebar",
-        "vectorstores"
-    ]
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "cSpell.words": [
+    "Autosize",
+    "docintellect",
+    "hookform",
+    "huggingface",
+    "HUGGINGFACEHUB",
+    "langchain",
+    "Nums",
+    "openai",
+    "Opps",
+    "pincone",
+    "simplebar",
+    "supabase",
+    "vectorstores"
+  ],
+  "deno.enablePaths": [
+    "supabase/functions"
+  ],
+  "deno.lint": true,
+  "deno.unstable": true
 }
