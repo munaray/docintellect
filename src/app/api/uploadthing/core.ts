@@ -6,7 +6,7 @@ import {
 } from 'uploadthing/next'
 
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
-import { HuggingFaceInferenceEmbeddings} from "@langchain/community/embeddings/hf";
+import { OpenAIEmbeddings } from '@langchain/openai'
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { client } from "@/lib/supabase"
 
@@ -62,8 +62,8 @@ const onUploadComplete = async ({
     const docs = await loader.load()
 
     // vectorize and index entire document
-    const embeddings = new HuggingFaceInferenceEmbeddings({
-      apiKey: process.env.HUGGINGFACEHUB_API_KEY,
+    const embeddings = new OpenAIEmbeddings({
+      apiKey: process.env.OPENAI_API_KEY,
     })
 
     await SupabaseVectorStore.fromDocuments(

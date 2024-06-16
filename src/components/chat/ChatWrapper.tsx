@@ -6,6 +6,7 @@ import ChatInput from "./ChatInput"
 import { ChevronLeft, Loader2, XCircle } from "lucide-react"
 import Link from "next/link"
 import { buttonVariants } from "../ui/button"
+import { ChatContextProvider } from "./ChatContext"
 
 interface ChatWrapperProps {
     fileId: string
@@ -78,13 +79,17 @@ const ChatWrapper = ({fileId}: ChatWrapperProps) => {
         </section>
     )
 
-    return <section className="relative min-h-full bg-zinc-50 flex divide-y divide-zinc-200 flex-col justify-between gap-2">
-        <figure className="flex flex-1 flex-col justify-between mb-28">
-            <Messages />
-        </figure>
+    return (
+        <ChatContextProvider fileId={fileId}>
+            <section className="relative min-h-full bg-zinc-50 flex divide-y divide-zinc-200 flex-col justify-between gap-2">
+            <figure className="flex flex-1 flex-col justify-between mb-28">
+                <Messages />
+            </figure>
 
-        <ChatInput />
-    </section>
+            <ChatInput />
+        </section>
+        </ChatContextProvider>
+    )
 }
 
 export default ChatWrapper

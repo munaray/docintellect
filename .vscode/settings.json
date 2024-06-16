@@ -13,6 +13,7 @@
     "openai",
     "Opps",
     "pincone",
+    "plpgsql",
     "simplebar",
     "supabase",
     "vectorstores"

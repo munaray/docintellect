@@ -37,17 +37,19 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
                 })
             })
 
-            if (!response.ok) throw new Error("Message failed to send")
+            if (!response.ok) {
+                throw new Error("Message failed to send")
+            }
 
             return response.body
         }
     })
 
-    const addMessage = () => sendMessage({ message })
-
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setMessage(e.target.value)
     }
+
+    const addMessage = () => sendMessage({ message })
 
     return (
         <ChatContext.Provider value={{
