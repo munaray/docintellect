@@ -9,6 +9,7 @@
     "huggingface",
     "HUGGINGFACEHUB",
     "langchain",
+    "mantine",
     "Nums",
     "openai",
     "Opps",

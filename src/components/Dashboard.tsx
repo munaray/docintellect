@@ -42,8 +42,8 @@ const Dashboard = () => {
       {files && files?.length !== 0 ? (
         <ul className="mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-2 lg:grid-cols-3">
           {files.sort((a, b) => (
-            new Date(b.createAt).getTime() -
-            new Date(a.createAt).getTime()
+            new Date(b.createdAt).getTime() -
+            new Date(a.createdAt).getTime()
           )).map((file) => (
             <li key={file.id}
               className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow transition hover:shadow-lg"
@@ -62,7 +62,7 @@ const Dashboard = () => {
               <section className="px-6 mt-4 grid grid-cols-3 place-items-center py-2 gap-6 text-xs text-zinc-500">
                 <figure className="flex items-center gap-2">
                   <Plus />
-                  {format(new Date(file.createAt), "MMM yyyy" )}
+                  {format(new Date(file.createdAt), "MMM yyyy" )}
                 </figure>
                 <figure className="flex items-center gap-2">
                   <MessageSquare className="h-4 w-4"/>

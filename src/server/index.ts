@@ -85,14 +85,14 @@ export const appRouter = router({
           fileId
         },
         orderBy: {
-          createAt: "desc"
+
         },
         cursor: cursor ? { id: cursor } : undefined,
         // to select custom properties
         select: {
           id: true,
           isUserMessage: true,
-          createAt: true,
+          createdAt: true,
           text: true,
         }
       })

@@ -83,7 +83,7 @@ const ChatWrapper = ({fileId}: ChatWrapperProps) => {
         <ChatContextProvider fileId={fileId}>
             <section className="relative min-h-full bg-zinc-50 flex divide-y divide-zinc-200 flex-col justify-between gap-2">
             <figure className="flex flex-1 flex-col justify-between mb-28">
-                <Messages />
+                    <Messages fileId={fileId} />
             </figure>
 
             <ChatInput />

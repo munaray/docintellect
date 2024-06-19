@@ -37,8 +37,8 @@ model File {
   url          String
   key          String
   message      Message[]
-  createAt     DateTime     @default(now())
-  updateAt     DateTime     @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   User         User?        @relation(fields: [userId], references: [id])
   userId       String?
 }
@@ -48,8 +48,8 @@ model Message {
   text String @db.Text()
 
   isUserMessage Boolean
-  createAt      DateTime @default(now())
-  updateAt      DateTime @updatedAt
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
   User          User?    @relation(fields: [userId], references: [id])
   userId        String?
   File          File?    @relation(fields: [fileId], references: [id])
