@@ -62,7 +62,7 @@ export const POST = async (req: NextRequest) => {
                 fileId
             },
             orderBy: {
-                createAt: "asc"
+                createdAt: "asc"
             },
             take: 6
         })
