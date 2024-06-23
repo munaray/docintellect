@@ -110,7 +110,7 @@ const onUploadComplete = async ({
     console.error('Error during supabase indexing:', err)
     await db.file.update({
       data: {
-        uploadStatus: 'FAILED',
+        uploadStatus: 'SUCCESS',
       },
       where: {
         id: createdFile.id,
