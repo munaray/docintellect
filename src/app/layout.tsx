@@ -1,6 +1,5 @@
-import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
-import { cn } from '@/lib/utils'
+import { cn, constructMetadata } from '@/lib/utils'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Provider from '@/components/Provider'
@@ -16,10 +15,7 @@ const fontSans = FontSans({
   weight: ["100", "200", "300", "400", "500", "600", "700","800", "900"]
 })
 
-export const metadata: Metadata = {
-  title: 'Docintellect',
-  description: 'A web app to query your pdf in seconds',
-}
+export const metadata = constructMetadata()
 
 export default function RootLayout({
   children,

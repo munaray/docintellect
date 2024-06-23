@@ -30,7 +30,7 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
       />
 
       {isOpen ? (
-        <div className='fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 z-0 w-full'>
+        <section className='fixed animate-in slide-in-from-right-10 fade-in-20 inset-0 z-0 w-full'>
           <ul className='absolute bg-white border-b border-zinc-200 shadow-xl grid w-full gap-3 px-10 pt-20 pb-8'>
             {!isAuth ? (
               <>
@@ -91,7 +91,7 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
               </>
             )}
           </ul>
-        </div>
+        </section>
       ) : null}
     </section>
   )

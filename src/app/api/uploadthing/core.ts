@@ -9,6 +9,8 @@ import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { OpenAIEmbeddings } from '@langchain/openai'
 import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { client } from "@/lib/supabase"
+import { getUserSubscriptionPlan } from '@/lib/stripe';
+import { PLANS } from '@/config/stripe';
 
 const f = createUploadthing()
 
@@ -18,9 +20,10 @@ const middleware = async () => {
 
   if (!user || !user.id) throw new Error('Unauthorized')
 
-  /* const subscriptionPlan = await getUserSubscriptionPlan() subscriptionPlan, */
+  const subscriptionPlan = await getUserSubscriptionPlan()
 
-  return { userId: user.id }
+
+  return { subscriptionPlan, userId: user.id }
 }
 
 
@@ -61,6 +64,25 @@ const onUploadComplete = async ({
     const loader = new PDFLoader(blob)
     const docs = await loader.load()
 
+    const pagesAmt = docs.length
+
+    const { subscriptionPlan } = metadata
+    const { isSubscribed } = subscriptionPlan
+
+    const isProExceeded = pagesAmt > PLANS.find((p) => p.name === "Pro")!.pagesPerPdf
+    const isFreeExceeded = pagesAmt > PLANS.find((p) => p.name === "Free")!.pagesPerPdf
+
+    if ((isSubscribed && isProExceeded) || (!isSubscribed && isFreeExceeded)) {
+      await db.file.update({
+        data: {
+          uploadStatus: "FAILED",
+        },
+        where: {
+          id: createdFile.id,
+        }
+      })
+    }
+
     // vectorize and index entire document
     const embeddings = new OpenAIEmbeddings({
       apiKey: process.env.OPENAI_API_KEY,
@@ -98,12 +120,12 @@ const onUploadComplete = async ({
 }
 
 export const ourFileRouter = {
-  pdfUploader: f({ pdf: { maxFileSize: '4MB' } })
+  freePlanUploader: f({ pdf: { maxFileSize: '4MB' } })
     .middleware(middleware)
     .onUploadComplete(onUploadComplete),
-  /* proPlanUploader: f({ pdf: { maxFileSize: '16MB' } })
+  proPlanUploader: f({ pdf: { maxFileSize: '16MB' } })
     .middleware(middleware)
-    .onUploadComplete(onUploadComplete), */
+    .onUploadComplete(onUploadComplete),
 } satisfies FileRouter
 
 export type OurFileRouter = typeof ourFileRouter
