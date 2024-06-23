@@ -21,7 +21,8 @@ const DropzoneUpload = ({
     const [isUploading, setIsUploading] = useState<boolean>(false)
     const [uploadProgress, setUploadProgress] = useState<number>(0)
 
-    const {toast} = useToast()
+    const { toast } = useToast()
+
     const { startUpload } = useUploadThing(
         isSubscribed ? "proPlanUploader" : "freePlanUploader"
     )
@@ -47,23 +48,28 @@ const DropzoneUpload = ({
                 return prevProgress + 5
             })
         }, 500)
+
+        return interval
     }
 
-    return <Dropzone multiple={false} onDrop={ async (acceptedFile) => {
-        setIsUploading(true)
+    return (
+        <Dropzone
+            multiple={false}
+            onDrop={async (acceptedFile) => {
+                setIsUploading(true)
 
-        const progressInterval = simulatedProgress()
+                const progressInterval = simulatedProgress()
 
-        //handle file uploading
-        const res = await startUpload(acceptedFile)
+                //handle file uploading
+                const res = await startUpload(acceptedFile)
 
-        if (!res) {
-            return toast({
-                title: "Opps! something went wrong",
-                description: "Please try again later",
-                variant: "destructive"
-            })
-        }
+                if (!res) {
+                    return toast({
+                        title: "Opps! something went wrong",
+                        description: "Please try again later",
+                        variant: "destructive"
+                    })
+                }
 
         const [fileReturn] = res
 
@@ -76,7 +82,7 @@ const DropzoneUpload = ({
                 variant: "destructive"
             })
         }
-        // clearInterval(progressInterval)
+        clearInterval(progressInterval)
         setUploadProgress(100)
         polling({key})
 
@@ -131,7 +137,7 @@ const DropzoneUpload = ({
                 </div>
            </section>
         )}
-    </Dropzone>
+    </Dropzone>)
 }
 
 const UploadButton = ({isSubscribed} : {isSubscribed: boolean}) => {
