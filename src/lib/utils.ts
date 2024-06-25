@@ -13,11 +13,6 @@ export const absoluteUrl = (path: string) => {
   return `http://localhost:${process.env.PORT ?? 3000}`
 }
 
-type ConstructMetadataProps = {
-
-
-}
-
 export function constructMetadata({
   title = "Docintellect - your number one intelligent PDF reader",
   description = "Docintellect is a Saas application that give you the ability to chart easily with your PDF using the power of AI",

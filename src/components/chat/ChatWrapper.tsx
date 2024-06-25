@@ -64,10 +64,10 @@ const ChatWrapper = ({fileId}: ChatWrapperProps) => {
                 <figure className="flex flex-col items-center gap-2">
                     <XCircle className="h-4 w-4 text-red-700"/>
                     <h3 className="font-semibold text-xl">
-                        Too many pages in PDF
+                        Fail to index into Supabase
                     </h3>
                     <p className="text-zinc-500 text-sm">
-                       Your <span className="font-medium">Plan</span> supports up to 5 pages per PDF
+                       You zero credit in your <span className="font-medium">openAI API</span> account recharge and try again later
                     </p>
                     <Link href="/dashboard" className={buttonVariants({
                         variant: "secondary",
